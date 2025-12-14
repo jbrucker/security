@@ -17,12 +17,13 @@ Your first choice should be to try to do it using a web browser on your smartpho
 
 But if you really need to use an untrusted computer, a good solution is to boot from a USB drive containing an in-memory, ephemeral OS.
 
-Some solutions are:
+## Portable, Bootable Operating Systems
+
 - [Tails][tails]: in-memory, security-hardened Linux designed for this use.
   - includes both Tor and the regular Firefox + UBlock Origin
   - can use USB drive for encrypted persistent storage
   - Tor can be slow and may be blocked by some bank/financial sites. Follow boot instructions to enable non-Tor mode.
-  - Download and Installing on a USB drive using [Linux](https://tails.net/install/linux/index.en.html) or [Windows](https://tails.net/install/windows/index.en.html) 
+  - Download and Install on a USB drive using [Linux](https://tails.net/install/linux/index.en.html) or [Windows](https://tails.net/install/windows/index.en.html) 
 - [Qubes OS][qubes]
   - Xen-based, disposable VMs.
   - more resource intensive, so may be slow when booted from USB
@@ -35,76 +36,40 @@ Some solutions are:
 
 For your use case of logging into a financial account from an untrusted PC at a customer service office, here is a clean recommendation:
 
-## Recommended Solution: Tails OS
+## How to Install Tails
 
-Tails (The Amnesic Incognito Live System) is designed precisely for this scenario. It runs entirely from RAM and leaves no trace on the host computer.
+Instructions to download and nstall on a USB drive using [Linux](https://tails.net/install/linux/index.en.html) or [Windows](https://tails.net/install/windows/index.en.html) 
 
-## Setup Instructions
-
-1. **Download and Verification**
-   - Download Tails from the official website: tails.net
+1. Download & Verify
+   - Download Tails from the official website: <https://tails.net/install>
    - Verify the download using the provided PGP signatures
-   - Use the Tails USB installer or Etcher to create bootable media
+2. Copy the downloaded image only an empty 8GB or larger USB drive.
+   - Use the Tails USB installer or...
+   - On Ubuntu, use Gnome Disks: [Install Tails on Linux](https://tails.net/install/linux/index.en.html)
+   - On Windows, use [Rufus](https://tails.net/rufus/rufus-portable.exe) a *great* utility for creating a bootable USB drive from an ISO image. 
+     See [Install Tails on Windows](https://tails.net/install/windows/index.en.html)
+3. Shutdown the PC.
+4. Know which key to press to interrupt the automatic boot so you can *explicitly* boot from the USB drive.
+   - Press F12 key on Acer, Dell, Lenovo, Samsung, and many other brands.
+   - Press F11 on Sony, Intel (motherboard), MSI
+   - A few brands use F2 or ESC
+   - You must press the key quickly after the computer starts to power-up. No harm to press multiple times.
 
-2. **Boot Configuration**
-   - Insert USB and boot from it (may require BIOS/UEFI change)
-   - At the Tails greeting screen, select your language
-   - Press the Down arrow to access "More options"
-   - Enable "Offline mode" (crucial for banking sites that block Tor)
-   - Do not enable persistent storage for maximum security
-   - Start Tails
+## Protocol for More Secure Internet Session... but no Guarantees
 
-## Banking Session Protocol
+1. Put your USB drive in read-only or write-disable mode, if possible.
+2. Boot the computer from your USB drive.
+   - Insert your USB drive only when computer is powered down, to avoid infection by native OS.
+4. Use your phone's "personal hotspot" for network connection, instead of Wi-Fi or whatever
+   - use wi-fi as a last resort
+5. Start a browser: either Tor or Firefox
+6. *Carefully* enter & verify the remote site's URL.  Verify verify its using a secure connection (padlock in browser).
+7. Logout **completely** when you are done.
 
-### Network Safety
-- Use your phone's personal hotspot, not public WiFi
-- If using their network, assume it may be monitored
+## Testing
 
-### Browser Configuration
-- Launch Tor Browser from the Applications menu
-- Disable anti-fingerprinting for banking compatibility:
-  - Type `about:config` in the address bar
-  - Search for `privacy.resistFingerprinting`
-  - Set to `false`
-- Alternatively, use the standard Firefox browser included in Tails
+Practice this protocol on your own computer at home.  Verify:
 
-### Account Access Steps
-1. Verify the bank's URL carefully before entering credentials
-2. Ensure HTTPS is active (padlock icon)
-3. Use existing 2FA method (authenticator app preferred over SMS)
-4. Complete only necessary transactions
-5. Avoid downloading documents or files
-6. Log out completely from the banking session
-
-## Security Limitations to Acknowledge
-
-- Hardware keyloggers between keyboard and computer are not mitigated
-- Shoulder surfing risk remains
-- Camera surveillance in the office is possible
-- Cold boot attacks (though highly unlikely in this scenario)
-- Compromised BIOS/UEFI firmware could potentially persist
-
-## Post-Session Actions
-
-1. Close all browser windows
-2. Shut down Tails completely
-3. Remove USB drive before the host computer powers off
-4. From a trusted device, verify no unusual account activity
-5. Consider changing your password as an extra precaution
-
-## Alternative Options
-
-If Tails encounters compatibility issues with your bank:
-
-1. **Knoppix Live USB** with manual privacy configuration
-2. **Linux Mint Live** with VPN configured before browsing
-3. **Portable hardened Firefox** on encrypted USB (less secure)
-
-## Testing Recommendation
-
-Practice this process at home first with a test account to ensure:
-- Your bank's website works with Tails
+- Your bank's website works with your portable, bootable OS (e.g. Tails)
 - You're comfortable with the boot process
-- Your 2FA method functions correctly
-
-This approach provides a reasonable balance of security and practicality for accessing sensitive accounts from untrusted hardware.
+- 2FA works correctly (you *should* use 2FA)
